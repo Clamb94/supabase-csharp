@@ -1,6 +1,7 @@
 ﻿using Supabase.Gotrue;
 using System.Collections.Generic;
 using Supabase.Gotrue.Interfaces;
+using System.Net.Http;
 
 namespace Supabase
 {
@@ -65,5 +66,10 @@ namespace Supabase
         /// The Supabase Functions Url Format
         /// </summary>
         public string FunctionsUrlFormat { get; set; } = "{0}/functions/v1";
+
+        /// <summary>
+        /// The httpClient used to make requests
+        /// </summary>
+        public HttpClient RequestHttpClient { get; set; } = new HttpClient();
     }
 }

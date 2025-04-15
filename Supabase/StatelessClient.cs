@@ -32,7 +32,8 @@ namespace Supabase
             return new Gotrue.ClientOptions
             {
                 Url = string.Format(options.AuthUrlFormat, supabaseUrl),
-                Headers = headers
+                Headers = headers,
+                RequestHttpClient = options.RequestHttpClient,
             };
         }
 
@@ -51,7 +52,8 @@ namespace Supabase
             return new Postgrest.ClientOptions
             {
                 Schema = options.Schema,
-                Headers = headers
+                Headers = headers,
+                RequestHttpClient = options.RequestHttpClient,
             };
         }
 
@@ -97,7 +99,7 @@ namespace Supabase
             }
 
             var headers = GetAuthHeaders(supabaseKey, options).MergeLeft(options.Headers);
-            var client = new Functions.Client(functionsUrl);
+            var client = new Functions.Client(functionsUrl, options.RequestHttpClient);
             client.GetHeaders = () => headers;
 
             return client;

@@ -167,7 +167,8 @@ namespace Supabase
             var gotrueOptions = new Gotrue.ClientOptions
             {
                 Url = authUrl,
-                AutoRefreshToken = _options.AutoRefreshToken
+                AutoRefreshToken = _options.AutoRefreshToken,
+                RequestHttpClient = _options.RequestHttpClient,
             };
 
             _auth = new Gotrue.Client(gotrueOptions);
@@ -185,10 +186,14 @@ namespace Supabase
             _realtime = new Realtime.Client(realtimeUrl, realtimeOptions);
             _realtime.GetHeaders = GetAuthHeaders;
 
-            _postgrest = new Postgrest.Client(restUrl, new Postgrest.ClientOptions { Schema = schema });
+            _postgrest = new Postgrest.Client(restUrl, new Postgrest.ClientOptions { 
+                Schema = schema,
+                RequestHttpClient = _options.RequestHttpClient,
+            });
+
             _postgrest.GetHeaders = GetAuthHeaders;
 
-            _functions = new Functions.Client(functionsUrl);
+            _functions = new Functions.Client(functionsUrl, options?.RequestHttpClient);
             _functions.GetHeaders = GetAuthHeaders;
 
             _storage = new Storage.Client(storageUrl, _options.StorageClientOptions);
