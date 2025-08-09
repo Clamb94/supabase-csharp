@@ -50,7 +50,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <ProjectReference Include="..\..\core-csharp\Core\Core.csproj" />
       <ProjectReference Include="..\..\functions-csharp\Functions\Functions.csproj" />
       <ProjectReference Include="..\..\gotrue-csharp\Gotrue\Gotrue.csproj" />
       <ProjectReference Include="..\..\postgrest-csharp\Postgrest\Postgrest.csproj" />
